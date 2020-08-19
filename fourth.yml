@@ -1,0 +1,14 @@
+---
+- hosts: web
+  become: yes
+  tasks:
+  - name: Install uti
+    package:
+      name: ["vim","elinks","zip"] 
+      state: present
+  
+
+
+
+
+...
