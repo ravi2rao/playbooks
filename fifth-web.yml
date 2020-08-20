@@ -6,6 +6,26 @@
     package:
       name: httpd
       state: present
+ 
+  - name: update file
+    copy:
+      dest: /var/www/html/index.html
+      content: <h1>Welcome to Apache-Rav</h1>
+
+  - name: update Apache port config
+    copy:
+      dest: /etc/httpd/conf/httpd.conf
+      src: /home/centos/playbooks/httpd.conf
+
+  - name:  Enable SElinux
+    selinux:
+      policy: targeted
+      state: permissive
+
+  - name: Restart service
+    service:
+      name: httpd
+      state: restarted
 
   - name: start service
     service:
@@ -13,10 +33,5 @@
       state: started
       enabled: yes  
   
-  - name: update file
-    copy:
-      dest: /var/www/html/index.html
-      content: <h1>Welcome to Apache-Rav</h1>
-
 
 ...
